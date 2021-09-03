@@ -16,7 +16,6 @@ var app = new Vue({
         sub3: 0.1,
         total: 0,
         arrayFactura: [],
-        arrayPromed: [],
         valorM3Final: 0,
         subFinal: 0,
         cargoFinal: 0,
