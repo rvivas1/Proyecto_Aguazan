@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Facturas Aguazan</title>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+          <br>
+            <h1>Facturación</h1>
+            <br>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Nombre</span>
+                <input v-model="nombre" type="text" class="form-control" placeholder="Ingrese nombre" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+            <select v-model="opcEst" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option value="0" selected>Seleccione un estrato</option>
+                <option value="1">Estrato 1</option>
+                <option value="2">Estrato 2</option>
+                <option value="3">Estrato 3</option>
+              </select>
+              <br>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Consumo</span>
+                <input v-model.number="cantm3" type="text" class="form-control" placeholder="Metros cúbicos" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              <button type="button" @click="facturar" class="btn btn-success">Facturar</button>
+              <br>
+              <br>
+              <div >
+              <h2 class="text-muted">Conceptos de facturación</h2>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Estrato</th>
+                    <th scope="col">Cargo fijo</th>
+                    <th scope="col">Consumo</th>
+                    <th scope="col">Valor-m3</th>
+                    <th scope="col">Subsidio</th>
+                    <th scope="col">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in arrayFactura">
+                      <td v-text="item.nombre"></td>
+                      <td v-text="item.estrato"></td>
+                      <td v-text="item.cargofijo"></td>
+                      <td v-text="item.consumo"></td>
+                      <td v-text="item.valor"></td>
+                      <td v-text="item.sub"></td>
+                      <td v-text="item.total"></td>
+                   
+                  </tr>
+                  <tr>
+                    <td></td>
+                  </tr>
+                  <tr>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              <h2 class="text-muted">Informe general</h2>
+              <h4 class="text-muted">Promedio de metros consumidos en cada estrato</h4>
+              <br>
+              <table class="table" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Estrato 1</th>
+                    <th scope="col">Estrato 2</th>
+                    <th scope="col">Estrato 3</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td v-text="promed1"></td>
+                    <td v-text="promed2"></td>
+                    <td v-text="promed3"></td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              <h4 class="text-muted">Total facturado en cada uno de los estratos</h4>
+              <br>
+              <table class="table" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Estrato 1</th>
+                    <th scope="col">Estrato 2</th>
+                    <th scope="col">Estrato 3</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td v-text="totalEstr1"></td>
+                    <td v-text="totalEstr2"></td>
+                    <td v-text="totalEstr3"></td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              <h4 class="text-muted">Total facturado en todos los estratos</h4>
+              <table class="table" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Total facturado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td v-text="totalGlobal"></td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script src="js/sources/vue.js"></script>
+<script src="js/sources/sweetalert.all.min.js"></script>
+<script src="js/aguazan.js"></script>
+</html>
