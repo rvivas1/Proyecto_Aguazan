@@ -137,6 +137,26 @@ var app = new Vue({
         vServ:this.valorServ,
         cRep:this.costRep
       });
+    },
+    eliminar(){
+      Swal.fire({
+        title: 'Está seguro?',
+        text: "Esta accion es irreversible!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, Eliminar!',
+        cancelButtonText: 'Cancelar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'Se eliminó correctamente.',
+            'success'
+          )
+        }
+      })
     }
     
 

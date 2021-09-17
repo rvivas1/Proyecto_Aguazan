@@ -168,7 +168,7 @@
     <h2 class="text-muted">Datos de usuario</h2>
     
     <br>
-    <table class="table table-bordered border-secondary">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">Nombre</th>
@@ -179,11 +179,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in arrayDatos">
+        <tr v-for="(item,index) in arrayDatos" :key="index">
           <td v-text="item.nomb"></td>
           <td v-text="item.apell"></td>
           <td v-text="item.ident"></td>
           <td v-text="item.tel"></td>
+          <td><button type="button" @click="eliminar" class="btn btn-danger">Eliminar</button></td>
         </tr>
     </tbody>
     <br>
