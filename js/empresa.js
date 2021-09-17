@@ -16,7 +16,7 @@ var app = new Vue({
     opcion6: false,
     opcion7: false,
     boton: 1,
-    isEdo: 1,
+    estado: 1,
     isPrecios: 0,
     clientePref: 0,
     lavGeneral: 0,
@@ -48,6 +48,7 @@ var app = new Vue({
       this.isPrecios = 0;
     },
     generarPrecio(){
+      this.estado=0;
       this.llenarDatos();
       this.datosVehiculo();
       if(this.opcion1==true){
@@ -156,7 +157,11 @@ var app = new Vue({
             'success'
           )
         }
-      })
+      });
+    
+    },
+    retornar(){
+      this.estado=1;
     }
     
 
