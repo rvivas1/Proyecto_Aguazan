@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <title>Empresa</title>
+</head>
+
+<body>
+  <div id="app" class="container">
+    <div v-show="isEdo">
+      <h1 class="text-muted text-center">Empresa de lavado y servicios especializados</h1>
+      <h2 class="text-muted">Datos del cliente</h2>
+      <br>
+      <div class="form-check form-switch">
+        <input v-model="clientePref" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+        <label class="form-check-label" for="flexSwitchCheckChecked">Cliente preferencial</label>
+      </div>
+      <br>
+      <div class="input-group">
+        <span class="input-group-text">Nombres y apellidos</span>
+        <input v-model="nombre" type="text" aria-label="First name" class="form-control" placeholder="Ingrese nombre">
+        <input v-model="apellido" type="text" aria-label="Last name" class="form-control"
+          placeholder="Ingrese apellido">
+      </div>
+      <br>
+      <div class="input-group">
+        <span class="input-group-text">Cédula y teléfono</span>
+        <input v-model="ident" type="text" aria-label="First name" class="form-control"
+          placeholder="Ingrese número de cédula">
+        <input v-model="telefono" type="text" aria-label="Last name" class="form-control"
+          placeholder="Ingrese número de teléfono">
+      </div>
+      <br>
+      <h2 class="text-muted">Datos del vehículo</h2>
+      <br>
+      <div class="input-group">
+        <span class="input-group-text">Tipo y placa</span>
+        <input v-model="tipo" type="text" aria-label="First name" class="form-control" placeholder="Tipo de vehículo">
+        <input v-model="placa" type="text" aria-label="Last name" class="form-control" placeholder="Placa de vehículo">
+      </div>
+      <br>
+      <h2 class="text-muted">Servicios</h2>
+      <div class="form-check form-check-inline px3">
+        <input v-model="opcion1" value="1" class="form-check-input" type="checkbox" name="flexRadioDefault"
+          id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">
+          Lavado general
+        </label>
+      </div>
+      <div class="form-check form-check-inline px3">
+        <input v-model="opcion2" value="2" class="form-check-input" type="checkbox" name="flexRadioDefault"
+          id="flexRadioDefault2">
+        <label class="form-check-label" for="flexRadioDefault2">
+          Lavado a presión
+        </label>
+      </div>
+      <div class="form-check form-check-inline px3">
+        <input v-model="opcion3" value="3" class="form-check-input" type="checkbox" name="flexRadioDefault"
+          id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">
+          Encerada
+        </label>
+      </div>
+      <div class="form-check form-check-inline px3">
+        <input v-model="opcion4" value="4" class="form-check-input" type="checkbox" name="flexRadioDefault"
+          id="flexRadioDefault2">
+        <label class="form-check-label" for="flexRadioDefault2">
+          Polichada
+        </label>
+      </div>
+      <div class="form-check form-check-inline px3">
+        <input v-model="opcion5" value="5" class="form-check-input" type="checkbox" name="flexRadioDefault"
+          id="flexRadioDefault2">
+        <label class="form-check-label" for="flexRadioDefault2">
+          Servicio completo
+        </label>
+      </div>
+      <br>
+      <br>
+      <h2 class="text-muted">Adicionales</h2>
+      <div class="form-check form-check-inline px3">
+        <input v-model="opcion6" value="6" class="form-check-input" type="checkbox" name="flexRadioDefault"
+          id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">
+          Mecánica automotriz
+        </label>
+      </div>
+      <div class="form-check form-check-inline px3">
+        <input v-model="opcion7" value="7" class="form-check-input" type="checkbox" name="flexRadioDefault"
+          id="flexRadioDefault2">
+        <label class="form-check-label" for="flexRadioDefault2">
+          Cambio de aceite
+        </label>
+      </div>
+      <br>
+      <br>
+      <button v-if="boton" type="button" @click="verTabla" class="btn btn-warning">Ver precios</button>
+      <button v-else type="button" @click="ocultarTabla" class="btn btn-secondary">Ocultar precios</button>
+      <br>
+      <table v-show="isPrecios" class="col-5">
+        <thead>
+          <tr>
+            <th scope="col">
+              <h3>Precios</h3>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="col">Lavado general:</th>
+            <td>$ 30.000</td>
+          </tr>
+          <tr>
+            <th scope="col">Lavado a presión:</th>
+            <td>$ 25.000</td>
+          </tr>
+          <tr>
+            <th scope="col">Encerada:</th>
+            <td>$ 15.000</td>
+          </tr>
+          <tr>
+            <th scope="col">Polichada:</th>
+            <td>$ 18.000</td>
+          </tr>
+          <tr>
+            <th scope="col">Servicio completo:</th>
+            <td>$ 80.000</td>
+          </tr>
+          <tr>
+            <th class="text-center">Adicionales</th>
+          </tr>
+          <tr>
+            <th scope="col">Mecánica automotriz:</th>
+            <td>$ 30.000</td>
+          </tr>
+          <tr>
+            <th scope="col">Cámbio de aceite:</th>
+            <td>$ 6.000</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h2 class="text-muted">Información del servicio adicional</h2>
+      <br>
+      <div class="input-group">
+        <span class="input-group-text">Mecánico y mano de obra</span>
+        <input v-model="nMecanico" type="text" aria-label="First name" class="form-control" placeholder="Nombre del mecánico">
+        <input v-model.number="manObra" type="number" aria-label="Last name" class="form-control" placeholder="Valor mano de obra">
+      </div>
+      <br>
+      <div class="input-group">
+        <span class="input-group-text">Servicio y repuestos</span>
+        <input v-model.number="valorServ" type="number" aria-label="First name" class="form-control" placeholder="Valor del servicio">
+        <input v-model.number="costRep" type="number" aria-label="Last name" class="form-control" placeholder="Costo de repuestos">
+      </div>
+      <br>
+      <button type="button" @click="generarPrecio" class="btn btn-secondary col-12">Facturar</button>
+      <br>
+      <h3 v-text="total"></h3>
+      <h3 v-text="tPagar"></h3>
+    </div>
+    <br>
+    <h1 class="text-center text-muted">Detalles del servicio</h1>
+    <h2 class="text-muted">Datos de usuario</h2>
+    
+    <br>
+    <table class="table table-bordered border-secondary">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Identificación</th>
+          <th scope="col">Teléfóno</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in arrayDatos">
+          <td v-text="item.nomb"></td>
+          <td v-text="item.apell"></td>
+          <td v-text="item.ident"></td>
+          <td v-text="item.tel"></td>
+        </tr>
+    </tbody>
+    <br>
+  </table>
+  <br>
+  <h2 class="text-muted">Datos del vehículo</h2>
+  <br>
+  <table class="table table-bordered border-secondary">
+    <thead>
+      <tr>
+        <th scope="col">Tipo</th>
+        <th scope="col">Placa</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="item in arrayVehiculo">
+        <td v-text="item.tipo"></td>
+        <td v-text="item.placa"></td>
+      </tr>
+  </tbody>
+  <br>
+</table>
+
+  <h2 class="text-muted">Datos de facturación</h2>
+  <br>
+  <table class="table table-bordered border-secondary">
+    <thead>
+      <tr>
+        <th scope="col">Lavado general</th>
+        <th scope="col">Lavado presión</th>
+        <th scope="col">Encerada</th>
+        <th scope="col">Polichada</th>
+        <th scope="col">Servicio completo</th>
+        <th scope="col">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="item in arrayFactura">
+        <td v-text="item.lGen"></td>
+        <td v-text="item.lPres"></td>
+        <td v-text="item.encer"></td>
+        <td v-text="item.poli"></td>
+        <td v-text="item.servC"></td>
+        <td v-text="item.total"></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <h1 class="text-muted text-center">Servicio adicional</h1>
+  <h2 class="text-muted">Mecánica automotriz</h2>
+  <br>
+  <table class="table table-bordered border-secondary">
+    <thead>
+      <tr>
+        <th scope="col">Nombre del mecánico</th>
+        <th scope="col">Valor servicio</th>
+        <th scope="col">Cambio de aceite</th>
+        <th scope="col">Mano de obra</th>
+        <th scope="col">Valor servicio</th>
+        <th scope="col">Costo repuestos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="item in arrayAdicional">
+        <td v-text="item.nombre"></td>
+        <td v-text="item.mAutM"></td>
+        <td v-text="item.cambAc"></td>
+        <td v-text="item.mObra"></td>
+        <td v-text="item.vServ"></td>
+        <td v-text="item.cRep"></td>
+      </tr>
+  </tbody>
+  <br>
+</table>
+  <button type="button" @click="" class="btn btn-warning col-2">Regresar</button>
+  <br>
+</div>
+
+</body>
+<script src="js/sources/vue.js"></script>
+<script src="js/sources/sweetalert.all.min.js"></script>
+<script src="js/empresa.js"></script>
+
+</html>

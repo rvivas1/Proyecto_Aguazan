@@ -81,7 +81,14 @@ var app = new Vue({
             this.agregarDetalle();
         },
         agregarDetalle() {
-            this.arrayFactura.push({ nombre: this.nombre, estrato: this.estrato, cargofijo: this.cargoFinal, consumo: this.cantm3, valor: this.valorM3Final, sub: this.subFinal, total: this.total });
+            this.arrayFactura.push({ 
+                nombre: this.nombre, 
+                estrato: this.estrato, 
+                cargofijo: this.cargoFinal, 
+                consumo: this.cantm3, 
+                valor: this.valorM3Final, 
+                sub: this.subFinal, 
+                total: this.total });
         }
     }
 });
