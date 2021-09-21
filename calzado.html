@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Calzado</title>
+</head>
+<body>
+    <div id="app">
+        <br>
+        <h1 class="text-muted text-center">Empresa de calzado</h1>
+        <h1 class="text-muted text-center">Un paso adelante</h1>
+        <div class="container col-3">
+            <br>
+            <select v-model="cargo" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option value="NA" selected>Seleccione un cargo</option>
+                <option value="A">Administrador</option>
+                <option value="S">Secretario</option>
+                <option value="V">Vendedor</option>
+                <option value="E">Ensamblador</option>
+              </select>
+            <br>
+                <input type="password" class="form-control" placeholder="Ingrese su PIN" aria-describedby="inputGroup-sizing-sm">
+                <br>
+                <div class="col-auto">
+                    <button class="btn btn-primary" type="submit">Acceder</button>
+                </div>
+        </div>
+   </div> 
+    
+</body>
+<script src="js/sources/vue.js"></script>
+<script src="js/sources/sweetalert.all.min.js"></script>
+<script src="js/calzado.js"></script>
+</html>

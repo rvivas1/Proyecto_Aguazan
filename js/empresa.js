@@ -111,6 +111,7 @@ var app = new Vue({
          ident:this.ident,
          tel:this.telefono
         });
+
     },
     datosVehiculo(){
       this.arrayVehiculo.push({
@@ -139,9 +140,9 @@ var app = new Vue({
         cRep:this.costRep
       });
     },
-    eliminar(){
+    eliminar(data=[],id){
       Swal.fire({
-        title: 'Está seguro?',
+        title: 'Está seguro que desea eliminar este registro ?',
         text: "Esta accion es irreversible!",
         icon: 'warning',
         showCancelButton: true,
@@ -151,6 +152,10 @@ var app = new Vue({
         cancelButtonText: 'Cancelar!'
       }).then((result) => {
         if (result.isConfirmed) {
+          this.arrayDatos.splice(id,1);
+          this.arrayVehiculo.splice(id,1);
+          this.arrayFactura.splice(id,1);
+          this.arrayAdicional.splice(id,1);
           Swal.fire(
             'Eliminado!',
             'Se eliminó correctamente.',

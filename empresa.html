@@ -185,7 +185,7 @@
             <td v-text="item.apell"></td>
             <td v-text="item.ident"></td>
             <td v-text="item.tel"></td>
-            <td><button type="button" @click="eliminar" class="btn btn-danger">Eliminar</button></td>
+            <td><button type="button" @click="eliminar(item,index)" class="btn btn-danger">Eliminar</button></td>
           </tr>
       </tbody>
       <br>
@@ -240,8 +240,8 @@
     <table class="table table-bordered border-secondary">
       <thead>
         <tr>
-          <th scope="col">Nombre del mecánico</th>
-          <th scope="col">Valor servicio</th>
+          <th scope="col">Mecánico</th>
+          <th scope="col">Mecánica automotriz</th>
           <th scope="col">Cambio de aceite</th>
           <th scope="col">Mano de obra</th>
           <th scope="col">Valor servicio</th>
