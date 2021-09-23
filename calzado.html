@@ -1,37 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <style>
+        body {
+            background: url('css/zapatos1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            /* for IE9+, Safari 4.1+, Chrome 3.0+, Firefox 3.6+ */
+            -webkit-background-size: cover;
+            /* for Safari 3.0 - 4.0 , Chrome 1.0 - 3.0 */
+            -moz-background-size: cover;
+            /* optional for Firefox 3.6 */
+            -o-background-size: cover;
+            /* for Opera 9.5 */
+            margin: 0;
+            /* to remove the default white margin of body */
+            padding: 0;
+            /* to remove the default white margin of body */
+            overflow: hidden;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <title>Calzado</title>
 </head>
+
 <body>
     <div id="app">
         <br>
-        <h1 class="text-muted text-center">Empresa de calzado</h1>
-        <h1 class="text-muted text-center">Un paso adelante</h1>
+        <br>
+        <h1 class="text-white text-center">Empresa de calzado ¡Un paso adelante!</h1>
+        <br>
+        <br>
         <div class="container col-3">
-            <br>
-            <select v-model="cargo" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                <option value="NA" selected>Seleccione un cargo</option>
-                <option value="A">Administrador</option>
-                <option value="S">Secretario</option>
-                <option value="V">Vendedor</option>
-                <option value="E">Ensamblador</option>
-              </select>
-            <br>
-                <input type="password" class="form-control" placeholder="Ingrese su PIN" aria-describedby="inputGroup-sizing-sm">
+            <div v-if="estadoLogin">
+                <h1 class="text-white text-center">¡BIENVENIDO!</h1>
                 <br>
-                <div class="col-auto">
-                    <button class="btn btn-primary" type="submit">Acceder</button>
+                <br>
+                <br>
+                <h1 class="text-white text-center" style="color: white;">Inicio de sesión</h1>
+                <form>
+                    <div class="align-content-sm-center">
+                        <label class="form-label" style="color: white;">CARGO</label>
+                        <select v-model="cargo" class="form-select" required>
+                            <option selected disabled value="">Seleccione un cargo</option>
+                            <option value="A">Administrador</option>
+                            <option value="S">Secretario</option>
+                            <option value="V">Vendedor</option>
+                            <option value="E">Ensamblador</option>
+                        </select>
+                        <br>
+                        <label class="form-label" style="color: white;">PIN</label>
+                        <input v-model="pin" maxlength="4" type="password" class="form-control">
+                        <br>
+                        <button class="btn btn-success col-6" type="button" @click="validarLogin">Acceder</button>
+                    </div>
+                </form>
+            </div>
+            <div v-if="estadoAdmin">
+                <h2 class="text-white text-center">Perfil administrador</h2>
+                <label class="form-label" style="color: white;">Modificar salario</label>
+                <input v-model="salario" type="number" placeholder="Ingrese nuevo salario" class="form-control">
+                <br>
+                <label class="form-label" style="color: white;">Cantidad máxima de zapatos y zapatillas</label>
+                <input v-model="canMax" type="number" placeholder="Ingrese cantidad a realizar" class="form-control">
+                <br>
+                <label class="form-label" style="color: white;">Precio de ensamble zapatos y zapatillas</label>
+                <input v-model="prEnsamble" type="number" placeholder="Ingrese precio de ensamble" class="form-control">
+                <br>
+                <label class="form-label" style="color: white;">Comisión del vendedor</label>
+                <input v-model="comision" type="number" placeholder="Ingrese la comisión" class="form-control">
+                <br>
+                <div class="row">
+                    <button class="btn btn-primary col-lg-6" type="button" @click="">Modificar</button>
+                    <br>
+                    <button class="btn btn-secondary col-lg-6" type="button" @click="salir">Salir</button>
                 </div>
+            </div>
+            <div v-if="estadoSec">
+                <h2 class="text-white text-center">Perfil secretario</h2>
+                <br>
+                <button class="btn btn-secondary col-6" type="button" @click="salir">Salir</button>
+            </div>
+            <div v-if="estadoVend">
+                <h2 class="text-white text-center">Perfil vendedor</h2>
+                <br>
+                <button class="btn btn-secondary col-6" type="button" @click="salir">Salir</button>
+            </div>
+            <div v-if="estadoEns">
+                <h2 class="text-white text-center">Perfil ensamblador</h2>
+                <br>
+                <button class="btn btn-secondary col-6" type="button" @click="salir">Salir</button>
+            </div>
+
         </div>
-   </div> 
-    
+
+    </div>
+
 </body>
 <script src="js/sources/vue.js"></script>
 <script src="js/sources/sweetalert.all.min.js"></script>
 <script src="js/calzado.js"></script>
+
 </html>
