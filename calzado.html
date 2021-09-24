@@ -4,7 +4,7 @@
 <head>
     <style>
         body {
-            background: url('css/zapatos1.jpg') no-repeat center center fixed;
+            background: url('css/fondo.PNG') no-repeat center center fixed;
             background-size: cover;
             /* for IE9+, Safari 4.1+, Chrome 3.0+, Firefox 3.6+ */
             -webkit-background-size: cover;
@@ -40,10 +40,10 @@
                 <br>
                 <br>
                 <br>
-                <h1 class="text-white text-center" style="color: white;">Inicio de sesión</h1>
+                <h1 class="text-white text-center">Inicio de sesión</h1>
                 <form>
                     <div class="align-content-sm-center">
-                        <label class="form-label" style="color: white;">CARGO</label>
+                        <label class="form-label" style="color: rgb(37, 36, 36);">CARGO</label>
                         <select v-model="cargo" class="form-select" required>
                             <option selected disabled value="">Seleccione un cargo</option>
                             <option value="A">Administrador</option>
@@ -52,34 +52,67 @@
                             <option value="E">Ensamblador</option>
                         </select>
                         <br>
-                        <label class="form-label" style="color: white;">PIN</label>
+                        <label class="form-label" style="color: rgb(43, 42, 42);">PIN</label>
                         <input v-model="pin" maxlength="4" type="password" class="form-control">
                         <br>
                         <button class="btn btn-success col-6" type="button" @click="validarLogin">Acceder</button>
                     </div>
                 </form>
             </div>
+        </div>
+        <div class="container col-6">
             <div v-if="estadoAdmin">
                 <h2 class="text-white text-center">Perfil administrador</h2>
-                <label class="form-label" style="color: white;">Modificar salario</label>
-                <input v-model="salario" type="number" placeholder="Ingrese nuevo salario" class="form-control">
+                <label class="form-label" style="color: white;"><h4>Modificar salario</h4></label>
+                <select v-model="cargos" @change="getSalario" class="form-select" required>
+                    <option selected disabled value="">Seleccione un cargo</option>
+                    <option value="A" >Administrador</option>
+                    <option value="S" >Secretario</option>
+                    <option value="V" >Vendedor</option>
+                    <option value="E" >Ensamblador</option>
+                </select>
                 <br>
-                <label class="form-label" style="color: white;">Cantidad máxima de zapatos y zapatillas</label>
-                <input v-model="canMax" type="number" placeholder="Ingrese cantidad a realizar" class="form-control">
+                <h4  class="text-white" >El salario base es:</h4>
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-secondary text-white" id="basic-addon1">Colaborador</span>
+                    <span v-text="salarioBase" type="text" class="form-control">
+                </div>
                 <br>
-                <label class="form-label" style="color: white;">Precio de ensamble zapatos y zapatillas</label>
-                <input v-model="prEnsamble" type="number" placeholder="Ingrese precio de ensamble" class="form-control">
+                <input v-model="nSalario" type="number" placeholder="Ingrese nuevo salario" class="form-control">
                 <br>
-                <label class="form-label" style="color: white;">Comisión del vendedor</label>
-                <input v-model="comision" type="number" placeholder="Ingrese la comisión" class="form-control">
+                <label class="form-label" style="color: white;"><h4>Cantidad máxima de zapatos y zapatillas</h4></label>
+                <input v-model="canMax" type="number" placeholder="Ingrese cantidad de producción" class="form-control">
+                <br>
+                <label class="form-label" style="color: white;"><h4>Precio de ensamble zapatos y zapatillas</h4></label>
+                <input v-model="prEnsamble" type="number" placeholder="Ingrese el precio del ensamble" class="form-control">
+                <br>
+                <label class="form-label" style="color: white;"><h4>Comisión del vendedor</h4></label>
+                <input v-model="comision" type="number" placeholder="Ingrese el valor de la comisión" class="form-control">
                 <br>
                 <div class="row">
-                    <button class="btn btn-primary col-lg-6" type="button" @click="">Modificar</button>
+                    <button class="btn btn-primary" type="button" @click="modificarSalario">Modificar</button>
                     <br>
+                    <br>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="text-success" scope="col">Nuevo salario</th>
+                            <th class="text-success" scope="col">Cant. zapatos y zapatillas</th>
+                            <th class="text-success" scope="col">Precio de ensamble</th>
+                            <th class="text-success" scope="col">Comisión vendedor</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td colspan="4">Mark</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     <br>
                     <button class="btn btn-secondary col-lg-6" type="button" @click="salir">Salir</button>
                 </div>
             </div>
+        </div>
             <div v-if="estadoSec">
                 <h2 class="text-white text-center">Perfil secretario</h2>
                 <br>
@@ -96,7 +129,7 @@
                 <button class="btn btn-secondary col-6" type="button" @click="salir">Salir</button>
             </div>
 
-        </div>
+       
 
     </div>
 

@@ -2,33 +2,39 @@ var app = new Vue({
   el: '#app',
   data: {
     cargo: "",
+    cargos: "",
     pin: "",
     estadoLogin: true,
     estadoAdmin: false,
     estadoSec: false,
     estadoVend: false,
     estadoEns: false,
-    salario: null,
     canMax: null,
     prEnsamble: null,
     comision: null,
-    arrayDatos: [
-      { cargo: "A", pin: "1230", car: "Administrador", salarioBase:"2000000"},
-      { cargo: "S", pin: "1231", car: "Secretario", salarioBase:"1600000"},
-      { cargo: "V", pin: "1232", car: "Vendedor", salarioBase:"1400000"},
-      { cargo: "E", pin: "1233", car: "Ensamblador", salarioBase:"1200000"},
+    salarioBase: null,
+    salarioAdm: 2000000,
+    salarioSec: 1300000,
+    salarioVen: 1100000,
+    salarioEns: 1400000,
+    nSalario: "",
+    arrayLogin: [
+      { cargo: "A", pin: "1230", car: "Administrador"},
+      { cargo: "S", pin: "1231", car: "Secretario"},
+      { cargo: "V", pin: "1232", car: "Vendedor"},
+      { cargo: "E", pin: "1233", car: "Ensamblador"},
     ],
+    arrayDatos:[]
     
 
 
   },
   methods: {
     validarLogin() {
-      for (let i = 0; i < this.arrayDatos.length; i++) {
-        if (this.cargo == this.arrayDatos[i].cargo) {
-          if (this.pin == this.arrayDatos[i].pin) {
-            this.mensaje('Bienvenido!', 'Has ingresado al perfil ' + this.arrayDatos[i].car, 'success');
-            // this.estado = false;
+      for (let i = 0; i < this.arrayLogin.length; i++) {
+        if (this.cargo == this.arrayLogin[i].cargo) {
+          if (this.pin == this.arrayLogin[i].pin) {
+            this.mensaje('Bienvenido!', 'Has ingresado al perfil ' + this.arrayLogin[i].car, 'success');
             this.Perfiles();
           } else {
             this.mensaje('Sin acceso!', 'Ingrese un PIN válido', 'error');
@@ -60,11 +66,34 @@ var app = new Vue({
         this.estadoEns=true;
       }
 
+     },
+     getSalario(){
+      if(this.cargos=="A"){
+        this.salarioBase=this.salarioAdm;
+      }
+      if(this.cargos=="S"){
+        this.salarioBase=this.salarioSec;
+      }
+      if(this.cargos=="V"){
+        this.salarioBase=this.salarioVen;
+      }
+      if(this.cargos=="E"){
+        this.salarioBase=this.salarioEns;
+      }
+
+    },
+    modificarSalario(){
+      this.salarioBase=this.nSalario;
+      this.nSalario = null;
+
+    },
+    modificarDatos(){
+      this.arrayDatos.push({});
 
     },
     salir(){
       this.estadoLogin=true;
-      this.estadoAdmin = false;
+      this.estadoAdmin=false;
       this.estadoSec=false;
       this.estadoVend=false;
       this.estadoEns=false;
@@ -78,5 +107,8 @@ var app = new Vue({
     }
 
 
+  },
+  computed: {
+    
   }
 });
