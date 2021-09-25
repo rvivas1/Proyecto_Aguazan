@@ -18,6 +18,7 @@ var app = new Vue({
     salarioVen: 1100000,
     salarioEns: 1400000,
     nSalario: "",
+    verTabla: false,
     arrayLogin: [
       { cargo: "A", pin: "1230", car: "Administrador"},
       { cargo: "S", pin: "1231", car: "Secretario"},
@@ -25,8 +26,6 @@ var app = new Vue({
       { cargo: "E", pin: "1233", car: "Ensamblador"},
     ],
     arrayDatos:[]
-    
-
 
   },
   methods: {
@@ -87,9 +86,18 @@ var app = new Vue({
       this.nSalario = null;
 
     },
-    modificarDatos(){
-      this.arrayDatos.push({});
-
+    actualizarDatos(){
+      this.arrayDatos.push({
+        cant:this.canMax,
+        precio:this.prEnsamble,
+        comision:this.comision
+      });
+      this.verTabla=true;
+      this.estadoAdmin=false;
+    },
+    regresar(){
+      this.verTabla=false;
+      this.estadoAdmin=true;
     },
     salir(){
       this.estadoLogin=true;
@@ -97,6 +105,8 @@ var app = new Vue({
       this.estadoSec=false;
       this.estadoVend=false;
       this.estadoEns=false;
+      this.pin="";
+      this.cargo="";
     },
     mensaje(titulo, msj, icono) {
       Swal.fire(

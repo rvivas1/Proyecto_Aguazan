@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <style>
+    <!-- <style>
         body {
             background: url('css/fondo.PNG') no-repeat center center fixed;
             background-size: cover;
@@ -19,7 +19,7 @@
             /* to remove the default white margin of body */
             overflow: hidden;
         }
-    </style>
+    </style> -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,7 +43,7 @@
                 <h1 class="text-white text-center">Inicio de sesión</h1>
                 <form>
                     <div class="align-content-sm-center">
-                        <label class="form-label" style="color: rgb(37, 36, 36);">CARGO</label>
+                        <label class="form-label" style="color: black;">CARGO</label>
                         <select v-model="cargo" class="form-select" required>
                             <option selected disabled value="">Seleccione un cargo</option>
                             <option value="A">Administrador</option>
@@ -52,10 +52,11 @@
                             <option value="E">Ensamblador</option>
                         </select>
                         <br>
-                        <label class="form-label" style="color: rgb(43, 42, 42);">PIN</label>
-                        <input v-model="pin" maxlength="4" type="password" class="form-control">
+                        <label class="form-label" style="color: black;">PIN</label>
+                        <input v-model="pin" maxlength="4" placeholder="Ingrese su PIN" type="password"
+                            class="form-control">
                         <br>
-                        <button class="btn btn-success col-6" type="button" @click="validarLogin">Acceder</button>
+                        <button class="btn btn-success col-12" type="button" @click="validarLogin">Acceder</button>
                     </div>
                 </form>
             </div>
@@ -63,16 +64,18 @@
         <div class="container col-6">
             <div v-if="estadoAdmin">
                 <h2 class="text-white text-center">Perfil administrador</h2>
-                <label class="form-label" style="color: white;"><h4>Modificar salario</h4></label>
+                <label class="form-label" style="color: white;">
+                    <h4>Modificar salario</h4>
+                </label>
                 <select v-model="cargos" @change="getSalario" class="form-select" required>
                     <option selected disabled value="">Seleccione un cargo</option>
-                    <option value="A" >Administrador</option>
-                    <option value="S" >Secretario</option>
-                    <option value="V" >Vendedor</option>
-                    <option value="E" >Ensamblador</option>
+                    <option value="A">Administrador</option>
+                    <option value="S">Secretario</option>
+                    <option value="V">Vendedor</option>
+                    <option value="E">Ensamblador</option>
                 </select>
                 <br>
-                <h4  class="text-white" >El salario base es:</h4>
+                <h4 class="text-white">El salario base es:</h4>
                 <div class="input-group mb-3">
                     <span class="input-group-text bg-secondary text-white" id="basic-addon1">Colaborador</span>
                     <span v-text="salarioBase" type="text" class="form-control">
@@ -80,56 +83,91 @@
                 <br>
                 <input v-model="nSalario" type="number" placeholder="Ingrese nuevo salario" class="form-control">
                 <br>
-                <label class="form-label" style="color: white;"><h4>Cantidad máxima de zapatos y zapatillas</h4></label>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <br>
+                    <button class="btn btn-primary me-md-2" @click="modificarSalario" type="button">Modificar</button>
+                </div>
+                <label class="form-label" style="color: white;">
+                    <h4>Cantidad máxima de zapatos y zapatillas</h4>
+                </label>
                 <input v-model="canMax" type="number" placeholder="Ingrese cantidad de producción" class="form-control">
                 <br>
-                <label class="form-label" style="color: white;"><h4>Precio de ensamble zapatos y zapatillas</h4></label>
-                <input v-model="prEnsamble" type="number" placeholder="Ingrese el precio del ensamble" class="form-control">
+                <label class="form-label" style="color: white;">
+                    <h4>Precio de ensamble zapatos y zapatillas</h4>
+                </label>
+                <input v-model="prEnsamble" type="number" placeholder="Ingrese el precio del ensamble"
+                    class="form-control">
                 <br>
-                <label class="form-label" style="color: white;"><h4>Comisión del vendedor</h4></label>
-                <input v-model="comision" type="number" placeholder="Ingrese el valor de la comisión" class="form-control">
+                <label class="form-label" style="color: white;">
+                    <h4>Comisión del vendedor</h4>
+                </label>
+                <input v-model="comision" type="number" placeholder="Ingrese el valor de la comisión"
+                    class="form-control">
                 <br>
-                <div class="row">
-                    <button class="btn btn-primary" type="button" @click="modificarSalario">Modificar</button>
-                    <br>
-                    <br>
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th class="text-success" scope="col">Nuevo salario</th>
-                            <th class="text-success" scope="col">Cant. zapatos y zapatillas</th>
-                            <th class="text-success" scope="col">Precio de ensamble</th>
-                            <th class="text-success" scope="col">Comisión vendedor</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td colspan="4">Mark</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    <br>
-                    <button class="btn btn-secondary col-lg-6" type="button" @click="salir">Salir</button>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <button class="btn btn-primary me-md-2" @click="actualizarDatos" type="button">Actualizar</button>
+                    <button class="btn btn-secondary" @click="salir" type="button">Cerrar sesión</button>
+                </div>
+                <br>
+            </div>
+            <div v-if="verTabla">
+                <h1 class="text-muted text-lg-center">Reportes</h1>
+                <br>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-white" scope="col">Cant. zapatos y zapatillas</th>
+                            <th class="text-white" scope="col">Precio de ensamble</th>
+                            <th class="text-white" scope="col">Comisión vendedor</th>
+                        </tr>
+                    </thead>
+                    <tbody v-if="arrayDatos.length">
+                        <tr v-for="item in arrayDatos">
+                            <td v-text="item.cant"></td>
+                            <td v-text="item.precio"></td>
+                            <td v-text="item.comision"></td>
+                        </tr>
+                    </tbody>
+                    <tbody v-else>
+                        <tr align="center">
+                            <td>NO hay registros nuevos</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button class="btn btn-primary me-md-2" @click="regresar" type="button">Atrás</button>
                 </div>
             </div>
         </div>
+        <div class="container col-6">
             <div v-if="estadoSec">
                 <h2 class="text-white text-center">Perfil secretario</h2>
                 <br>
-                <button class="btn btn-secondary col-6" type="button" @click="salir">Salir</button>
-            </div>
-            <div v-if="estadoVend">
-                <h2 class="text-white text-center">Perfil vendedor</h2>
+                <h4 class="text-white">El salario base es:</h4>
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-secondary text-white" id="basic-addon1">Colaborador</span>
+                    <span v-text="" type="text" class="form-control">
+                </div>
                 <br>
-                <button class="btn btn-secondary col-6" type="button" @click="salir">Salir</button>
-            </div>
-            <div v-if="estadoEns">
-                <h2 class="text-white text-center">Perfil ensamblador</h2>
+                <input v-model="nSalario" type="number" placeholder="Ingrese nuevo salario" class="form-control">
                 <br>
-                <button class="btn btn-secondary col-6" type="button" @click="salir">Salir</button>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <br>
+                    <button class="btn btn-primary me-md-2" @click="modificarSalario" type="button">Modificar</button>
+                </div>
+                <button class="btn btn-secondary" type="button" @click="salir">Salir</button>
             </div>
-
-       
+        </div>
+        <div v-if="estadoVend">
+            <h2 class="text-white text-center">Perfil vendedor</h2>
+            <br>
+            <button class="btn btn-secondary col-6" type="button" @click="salir">Salir</button>
+        </div>
+        <div v-if="estadoEns">
+            <h2 class="text-white text-center">Perfil ensamblador</h2>
+            <br>
+            <button class="btn btn-secondary col-6" type="button" @click="salir">Salir</button>
+        </div>
 
     </div>
 
