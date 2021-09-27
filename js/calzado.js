@@ -14,26 +14,30 @@ var app = new Vue({
     comision: null,
     salarioBase: null,
     salarioAdm: 2000000,
-    salarioSec: 1300000,
+    salarioSec: 950000,
     salarioVen: 1100000,
     salarioEns: 1400000,
     nSalario: "",
     verTabla: false,
+    valHoraExt: 0,
+    valHora: 0,
+    cantHoras: 0,
+    totExtra: 0,
+    totFinal: 0,
     arrayLogin: [
-      { cargo: "A", pin: "1230", car: "Administrador"},
-      { cargo: "S", pin: "1231", car: "Secretario"},
-      { cargo: "V", pin: "1232", car: "Vendedor"},
-      { cargo: "E", pin: "1233", car: "Ensamblador"},
+      { cargo: "A", pin: "1", nombre: "Administrador"},
+      { cargo: "S", pin: "2", nombre: "Secretario"},
+      { cargo: "V", pin: "3", nombre: "Vendedor"},
+      { cargo: "E", pin: "4", nombre: "Ensamblador"},
     ],
     arrayDatos:[]
-
   },
   methods: {
     validarLogin() {
       for (let i = 0; i < this.arrayLogin.length; i++) {
         if (this.cargo == this.arrayLogin[i].cargo) {
           if (this.pin == this.arrayLogin[i].pin) {
-            this.mensaje('Bienvenido!', 'Has ingresado al perfil ' + this.arrayLogin[i].car, 'success');
+            this.mensajeModal(this.arrayLogin[i].nombre);
             this.Perfiles();
           } else {
             this.mensaje('Sin acceso!', 'Ingrese un PIN válido', 'error');
@@ -56,6 +60,7 @@ var app = new Vue({
       }else if(this.cargo=="S"){
         this.estadoLogin=false;
         this.estadoSec=true;
+        this.salarioSec;
       }else if(this.cargo=="V"){
         this.estadoLogin=false;
         this.estadoVend=true;
@@ -79,12 +84,10 @@ var app = new Vue({
       if(this.cargos=="E"){
         this.salarioBase=this.salarioEns;
       }
-
     },
     modificarSalario(){
       this.salarioBase=this.nSalario;
       this.nSalario = null;
-
     },
     actualizarDatos(){
       this.arrayDatos.push({
@@ -114,11 +117,23 @@ var app = new Vue({
         msj,
         icono
       )
+    },
+    mensajeModal(nombre){
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Has ingresado correctamente al cargo: ' + nombre,
+        showConfirmButton: false,
+        timer: 2500
+      })
+    },
+    calcularSalario(){
+      this.valHora = (this.salarioSec/30)/8;
+      this.valHoraExt = this.valHora * 1.8;
+      this.totExtra = this.valHoraExt * this.cantHoras;
+      this.totFinal = this.salarioSec + this.totExtra;
     }
-
-
   },
-  computed: {
-    
+  computed:{    
   }
 });

@@ -146,16 +146,18 @@
                 <h4 class="text-white">El salario base es:</h4>
                 <div class="input-group mb-3">
                     <span class="input-group-text bg-secondary text-white" id="basic-addon1">Colaborador</span>
-                    <span v-text="" type="text" class="form-control">
+                    <span v-text="salarioSec" type="text" class="form-control">
                 </div>
                 <br>
-                <input v-model="nSalario" type="number" placeholder="Ingrese nuevo salario" class="form-control">
+                <input v-model="cantHoras" type="number" placeholder="Ingrese Las horas extras" class="form-control">
                 <br>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <br>
-                    <button class="btn btn-primary me-md-2" @click="modificarSalario" type="button">Modificar</button>
+                    <button class="btn btn-primary me-md-2" @click="calcularSalario" type="button">Calcular</button>
                 </div>
                 <button class="btn btn-secondary" type="button" @click="salir">Salir</button>
+                <br>
+                <h3 v-text="totFinal"></h3>
             </div>
         </div>
         <div v-if="estadoVend">
